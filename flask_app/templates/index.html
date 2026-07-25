@@ -1,0 +1,109 @@
+{% extends "base.html" %}
+
+{% block title %}
+
+EduGenie | Home
+
+{% endblock %}
+
+
+{% block content %}
+
+<div class="row align-items-center">
+
+    <div class="col-lg-6">
+
+        <h1 class="display-4 fw-bold">
+
+            Learn Smarter with AI
+
+        </h1>
+
+        <p class="lead mt-4">
+
+            Upload your study materials and let EduGenie generate
+            summaries, quizzes, MCQs and answer your questions
+            using Retrieval-Augmented Generation (RAG).
+
+        </p>
+
+        <a href="/upload"
+           class="btn btn-primary btn-lg mt-3">
+
+            Upload PDF
+
+        </a>
+
+    </div>
+
+    <div class="col-lg-6 text-center">
+
+        <img src="{{ url_for('static', filename='images/hero.png') }}"
+             class="img-fluid"
+             alt="EduGenie">
+
+    </div>
+
+</div>
+
+<hr class="my-5">
+
+<div class="row text-center">
+
+    <div class="col-md-4">
+
+        <i class="bi bi-file-earmark-pdf display-4 text-danger"></i>
+
+        <h4 class="mt-3">
+
+            PDF Upload
+
+        </h4>
+
+        <p>
+
+            Upload notes, books and study material.
+
+        </p>
+
+    </div>
+
+    <div class="col-md-4">
+
+        <i class="bi bi-robot display-4 text-primary"></i>
+
+        <h4 class="mt-3">
+
+            AI Chat
+
+        </h4>
+
+        <p>
+
+            Ask questions from your documents.
+
+        </p>
+
+    </div>
+
+    <div class="col-md-4">
+
+        <i class="bi bi-journal-check display-4 text-success"></i>
+
+        <h4 class="mt-3">
+
+            Smart Quiz
+
+        </h4>
+
+        <p>
+
+            Generate MCQs and summaries instantly.
+
+        </p>
+
+    </div>
+
+</div>
+
+{% endblock %}

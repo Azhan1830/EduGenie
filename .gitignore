@@ -216,3 +216,24 @@ __marimo__/
 
 # Streamlit
 .streamlit/secrets.toml
+
+# ==========================
+# EduGenie Project
+# ==========================
+
+# Uploaded PDFs
+flask_app/uploads/*
+!flask_app/uploads/.gitkeep
+
+# FAISS vector database
+flask_app/vector_db/*
+!flask_app/vector_db/.gitkeep
+
+# Optional: uploaded datasets or temporary data
+data/
+
+# VS Code workspace settings (optional)
+.vscode/
+
+# macOS
+.DS_Store
