@@ -4,95 +4,191 @@
 <head>
 
     <meta charset="UTF-8">
-
     <meta name="viewport"
           content="width=device-width, initial-scale=1.0">
 
-    <title>{% block title %}EduGenie{% endblock %}</title>
+    <title>
 
-    <!-- Bootstrap CSS -->
+        {% block title %}
+        EduGenie
+        {% endblock %}
 
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.7/dist/css/bootstrap.min.css"
-          rel="stylesheet">
+    </title>
+
+    <!-- Bootstrap -->
+
+    <link
+        href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.7/dist/css/bootstrap.min.css"
+        rel="stylesheet">
 
     <!-- Bootstrap Icons -->
 
-    <link rel="stylesheet"
-          href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
+    <link
+        rel="stylesheet"
+        href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.13.1/font/bootstrap-icons.min.css">
+
+    <!-- Google Font -->
+
+    <link
+        href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap"
+        rel="stylesheet">
 
     <!-- Custom CSS -->
 
-    <link rel="stylesheet"
-          href="{{ url_for('static', filename='css/style.css') }}">
+    <link
+        rel="stylesheet"
+        href="{{ url_for('static', filename='css/styles.css') }}">
 
 </head>
 
 <body>
 
-    <!-- Navbar -->
+<nav class="navbar navbar-expand-lg navbar-dark bg-dark shadow-sm">
 
-    <nav class="navbar navbar-expand-lg navbar-dark bg-dark shadow-sm">
+    <div class="container">
 
-        <div class="container">
+        <a class="navbar-brand fw-bold"
+           href="/">
 
-            <a class="navbar-brand fw-bold"
-               href="/">
-                EduGenie
+            <i class="bi bi-robot"></i>
+
+            EduGenie AI
+
+        </a>
+
+        <div>
+
+            <a href="/upload"
+               class="btn btn-outline-light me-2">
+
+                Upload PDF
+
             </a>
 
-            <button class="navbar-toggler"
-                    type="button"
-                    data-bs-toggle="collapse"
-                    data-bs-target="#navbar">
+            <a href="/chat"
+               class="btn btn-primary">
 
-                <span class="navbar-toggler-icon"></span>
+                Chat
 
-            </button>
-
-            <div class="collapse navbar-collapse"
-                 id="navbar">
-
-                <ul class="navbar-nav ms-auto">
-
-                    <li class="nav-item">
-
-                        <a class="nav-link"
-                           href="{{ url_for('main.home') }}">Home</a>
-
-                    </li>
-
-                    <li class="nav-item">
-
-                        <a class="nav-link"
-                           href="{{ url_for('upload.upload') }}">
-
-                            Upload PDF
-
-                        </a>
-
-                    </li>
-
-                </ul>
-
-            </div>
+            </a>
 
         </div>
 
-    </nav>
+    </div>
 
-    <!-- Main Content -->
+</nav>
 
-    <main class="container py-5">
+<main>
 
-        {% block content %}
 
-        {% endblock %}
+<div class="container mt-3">
 
-    </main>
+{% with messages = get_flashed_messages(with_categories=true) %}
 
-    <!-- Bootstrap JS -->
+    {% if messages %}
 
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.7/dist/js/bootstrap.bundle.min.js"></script>
+        {% for category, message in messages %}
+
+            <div class="alert alert-{{ category }} alert-dismissible fade show shadow-sm">
+
+                {{ message }}
+
+                <button
+                    type="button"
+                    class="btn-close"
+                    data-bs-dismiss="alert">
+                </button>
+
+            </div>
+
+        {% endfor %}
+
+    {% endif %}
+
+{% endwith %}
+
+</div>
+
+{% block content %}
+{% endblock %}
+
+</main>
+
+
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.7/dist/js/bootstrap.bundle.min.js">
+    document.addEventListener("DOMContentLoaded", () => {
+
+    const form = document.querySelector("form");
+
+    if(form){
+
+        form.addEventListener("submit", () => {
+
+            const btn=document.getElementById("uploadButton");
+
+            if(btn){
+
+                btn.innerHTML=`
+                <span class="spinner-border spinner-border-sm"></span>
+                Processing PDF...
+                `;
+
+                btn.disabled=true;
+
+            }
+
+        });
+
+    }
+
+})
+
+document.addEventListener("DOMContentLoaded",()=>{
+
+    const askButton=document.getElementById("askButton");
+
+    const form=document.querySelector(".chat-form");
+
+    if(form){
+
+        form.addEventListener("submit",()=>{
+
+            askButton.innerHTML=`
+            <span class="spinner-border spinner-border-sm"></span>
+            `;
+
+            askButton.disabled=true;
+
+        });
+
+    }
+
+}); 
+
+
+function copyAnswer(){
+
+    const answer=document.querySelector(".ai-message .message-body");
+
+    if(!answer) return;
+
+    navigator.clipboard.writeText(answer.innerText);
+
+}
+
+document.addEventListener("DOMContentLoaded",()=>{
+
+    const input=document.querySelector('input[name="question"]');
+
+    if(input){
+
+        input.focus();
+
+    }
+
+});
+
+</script>
 
 </body>
 

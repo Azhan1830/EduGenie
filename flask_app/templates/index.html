@@ -1,109 +1,124 @@
 {% extends "base.html" %}
 
 {% block title %}
-
-EduGenie | Home
-
+EduGenie AI
 {% endblock %}
-
 
 {% block content %}
 
-<div class="row align-items-center">
+<section class="hero-section">
 
-    <div class="col-lg-6">
+    <div class="container text-center">
 
-        <h1 class="display-4 fw-bold">
+        <h1 class="display-4 fw-bold mb-4">
 
-            Learn Smarter with AI
+            🤖 EduGenie AI
 
         </h1>
 
-        <p class="lead mt-4">
+        <p class="lead mb-4">
 
-            Upload your study materials and let EduGenie generate
-            summaries, quizzes, MCQs and answer your questions
-            using Retrieval-Augmented Generation (RAG).
-
-        </p>
-
-        <a href="/upload"
-           class="btn btn-primary btn-lg mt-3">
-
-            Upload PDF
-
-        </a>
-
-    </div>
-
-    <div class="col-lg-6 text-center">
-
-        <img src="{{ url_for('static', filename='images/hero.png') }}"
-             class="img-fluid"
-             alt="EduGenie">
-
-    </div>
-
-</div>
-
-<hr class="my-5">
-
-<div class="row text-center">
-
-    <div class="col-md-4">
-
-        <i class="bi bi-file-earmark-pdf display-4 text-danger"></i>
-
-        <h4 class="mt-3">
-
-            PDF Upload
-
-        </h4>
-
-        <p>
-
-            Upload notes, books and study material.
+            Upload your PDF and ask questions using the power of
+            Retrieval-Augmented Generation (RAG) and Google's Gemini AI.
 
         </p>
 
-    </div>
+        <div class="mt-4">
 
-    <div class="col-md-4">
+            <a href="/upload" class="btn btn-primary btn-lg me-3">
 
-        <i class="bi bi-robot display-4 text-primary"></i>
+                <i class="bi bi-upload"></i>
 
-        <h4 class="mt-3">
+                Upload PDF
 
-            AI Chat
+            </a>
 
-        </h4>
+            <a href="/chat" class="btn btn-outline-dark btn-lg">
 
-        <p>
+                <i class="bi bi-chat-dots"></i>
 
-            Ask questions from your documents.
+                Start Chat
 
-        </p>
+            </a>
 
-    </div>
-
-    <div class="col-md-4">
-
-        <i class="bi bi-journal-check display-4 text-success"></i>
-
-        <h4 class="mt-3">
-
-            Smart Quiz
-
-        </h4>
-
-        <p>
-
-            Generate MCQs and summaries instantly.
-
-        </p>
+        </div>
 
     </div>
 
-</div>
+</section>
+
+<section class="container py-5">
+
+    <div class="row g-4">
+
+        <div class="col-md-4">
+
+            <div class="card h-100 text-center p-4">
+
+                <i class="bi bi-file-earmark-pdf display-4 text-danger"></i>
+
+                <h4 class="mt-3">
+
+                    Upload Documents
+
+                </h4>
+
+                <p>
+
+                    Upload PDF files securely and process them for AI-powered search.
+
+                </p>
+
+            </div>
+
+        </div>
+
+        <div class="col-md-4">
+
+            <div class="card h-100 text-center p-4">
+
+                <i class="bi bi-cpu display-4 text-primary"></i>
+
+                <h4 class="mt-3">
+
+                    AI Powered
+
+                </h4>
+
+                <p>
+
+                    Gemini AI answers questions using only the relevant parts of your document.
+
+                </p>
+
+            </div>
+
+        </div>
+
+        <div class="col-md-4">
+
+            <div class="card h-100 text-center p-4">
+
+                <i class="bi bi-lightning-charge display-4 text-warning"></i>
+
+                <h4 class="mt-3">
+
+                    Fast Retrieval
+
+                </h4>
+
+                <p>
+
+                    FAISS vector search finds the most relevant content in milliseconds.
+
+                </p>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</section>
 
 {% endblock %}

@@ -6,66 +6,59 @@ Upload PDF
 
 {% block content %}
 
-<div class="row justify-content-center">
+<div class="container py-5">
 
-    <div class="col-lg-7">
+    <div class="upload-card mx-auto">
 
-        <div class="card shadow-lg p-4">
+        <div class="text-center">
 
-            <h2 class="text-center mb-4">
+            <i class="bi bi-file-earmark-pdf upload-icon"></i>
 
-                <i class="bi bi-cloud-upload"></i>
+            <h2 class="mt-3">
 
-                Upload Study Material
+                Upload Your PDF
 
             </h2>
 
-            {% with messages = get_flashed_messages(with_categories=true) %}
+            <p class="text-muted">
 
-            {% if messages %}
+                Select a PDF document and chat with it using AI.
 
-            {% for category, message in messages %}
+            </p>
 
-            <div class="alert alert-{{ category }}">
+        </div>
 
-                {{ message }}
+        <form
+            method="POST"
+            enctype="multipart/form-data"
+            class="mt-4"
+        >
+
+            <div class="mb-4">
+
+                <input
+                    type="file"
+                    class="form-control"
+                    name="pdf"
+                    accept=".pdf"
+                    required
+                >
 
             </div>
 
-            {% endfor %}
+            <button
+                id="uploadButton"
+                type="submit"
+                class="btn btn-primary btn-lg w-100"
+            >
 
-            {% endif %}
+                <i class="bi bi-cloud-upload"></i>
 
-            {% endwith %}
+                Upload & Process
 
-            <form method="POST"
-                  enctype="multipart/form-data">
+            </button>
 
-                <div class="mb-3">
-
-                    <label class="form-label">
-
-                        Choose PDF
-
-                    </label>
-
-                    <input type="file"
-                           class="form-control"
-                           name="pdf"
-                           accept=".pdf"
-                           required>
-
-                </div>
-
-                <button class="btn btn-primary w-100">
-
-                    Upload PDF
-
-                </button>
-
-            </form>
-
-        </div>
+        </form>
 
     </div>
 
