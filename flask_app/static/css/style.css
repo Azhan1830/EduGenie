@@ -249,3 +249,29 @@ body{
     line-height:1.7;
 
 }
+
+/* PDF Library */
+
+.list-group-item{
+
+    border-radius:12px;
+
+    margin-bottom:12px;
+
+    padding:16px 20px;
+
+    border:none;
+
+    box-shadow:0 5px 15px rgba(0,0,0,.05);
+
+    transition:.3s;
+
+}
+
+.list-group-item:hover{
+
+    transform:translateY(-2px);
+
+    box-shadow:0 10px 25px rgba(0,0,0,.08);
+
+}

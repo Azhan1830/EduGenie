@@ -1,0 +1,33 @@
+EduGenie Chat Export
+============================================================
+
+Question 1
+----------------------------------------
+DIFFERENCE BWTWEEN AI AND ML
+
+Answer
+----------------------------------------
+I couldn't find this information in the uploaded documents.
+
+============================================================
+
+Question 2
+----------------------------------------
+What is ai?
+
+Answer
+----------------------------------------
+**Short Definition:**
+Artificial Intelligence (AI) is the branch of computer science that enables machines to perform tasks that normally require human intelligence.
+
+**Explanation:**
+AI allows computers and machines to imitate human intelligence to automate tasks, make smart decisions, and create intelligent applications. Key capabilities and features of AI include:
+
+* Learning from data and experience
+* Reasoning and problem-solving
+* Making decisions based on available information
+* Understanding language
+* Automating repetitive and complex tasks
+
+============================================================
+

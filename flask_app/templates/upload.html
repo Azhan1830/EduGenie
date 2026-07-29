@@ -8,6 +8,8 @@ Upload PDF
 
 <div class="container py-5">
 
+    <!-- Upload Card -->
+
     <div class="upload-card mx-auto">
 
         <div class="text-center">
@@ -22,7 +24,7 @@ Upload PDF
 
             <p class="text-muted">
 
-                Select a PDF document and chat with it using AI.
+                Select one or more PDF documents and chat with them using AI.
 
             </p>
 
@@ -59,6 +61,75 @@ Upload PDF
             </button>
 
         </form>
+
+    </div>
+
+    <!-- PDF Library -->
+
+    <div class="upload-card mx-auto mt-5">
+
+        <h3 class="mb-4">
+
+            <i class="bi bi-folder2-open"></i>
+
+            Uploaded Documents
+
+        </h3>
+
+        {% if pdf_files %}
+
+            <p class="text-muted">
+
+                Total Documents:
+                <strong>{{ pdf_files|length }}</strong>
+
+            </p>
+
+            <div class="list-group">
+
+                {% for pdf in pdf_files %}
+
+                    <div class="list-group-item d-flex justify-content-between align-items-center">
+
+                        <div>
+
+                            <i class="bi bi-file-earmark-pdf text-danger"></i>
+
+                            {{ pdf }}
+
+                        </div>
+
+                        <div class="d-flex align-items-center gap-2">
+                            
+                            <span class="badge bg-success">
+                                Indexed
+                            </span>
+                            
+                            <form method="POST" action="{{ url_for('upload.delete_pdf', filename=pdf) }}" onsubmit="return confirm('Delete this PDF?');">
+                                
+                                <button class="btn btn-sm btn-danger" type="submit">
+                                    <i class="bi bi-trash"></i>
+                                </button>
+                            
+                            </form>
+                        
+                        </div>
+
+                    </div>
+
+                {% endfor %}
+
+            </div>
+
+        {% else %}
+
+            <div class="alert alert-info mb-0">
+
+                No PDF documents uploaded yet.
+
+            </div>
+
+        {% endif %}
 
     </div>
 

@@ -52,19 +52,18 @@ def upload():
             try:
 
                 result = process_pdf(
-                    pdf_path=filepath,
+                    upload_folder=current_app.config["UPLOAD_FOLDER"],
                     vector_db_path=current_app.config["VECTOR_DB_FOLDER"]
                 )
 
                 flash(result["message"], "success")
 
-                # Redirect directly to chat page
                 return redirect(url_for("chat.chat"))
 
             except Exception as e:
 
                 flash(
-                    f"Error while processing PDF: {str(e)}",
+                    f"Error while processing PDFs: {str(e)}",
                     "danger"
                 )
 
@@ -73,4 +72,41 @@ def upload():
         flash("Only PDF files are allowed.", "danger")
         return redirect(request.url)
 
-    return render_template("upload.html")
+    pdf_files = sorted(
+        [
+            file
+            for file in os.listdir(current_app.config["UPLOAD_FOLDER"])
+            if file.lower().endswith(".pdf")
+        ]
+    )
+    return render_template(
+        "upload.html",pdf_files=pdf_files
+    )
+
+@upload_bp.route("/delete/<filename>", methods=["POST"])
+def delete_pdf(filename):
+
+    filepath = os.path.join(
+        current_app.config["UPLOAD_FOLDER"],
+        filename
+    )
+
+    try:
+
+        # Delete the selected PDF
+        if os.path.exists(filepath):
+            os.remove(filepath)
+
+        # Rebuild FAISS using remaining PDFs
+        process_pdf(
+            upload_folder=current_app.config["UPLOAD_FOLDER"],
+            vector_db_path=current_app.config["VECTOR_DB_FOLDER"]
+        )
+
+        flash(f"{filename} deleted successfully.", "success")
+
+    except Exception as e:
+
+        flash(f"Error deleting PDF: {str(e)}", "danger")
+
+    return redirect(url_for("upload.upload"))
