@@ -1,15 +1,11 @@
 """
 qa_pipeline.py
-
 Combines Retrieval + Gemini
 """
-
 from utils.reteriver import retrieve_chunks
 from utils.llm import generate_answer
 
-
 MIN_CONTEXT_LENGTH = 50
-
 
 def answer_question(question, vector_db_path):
     """

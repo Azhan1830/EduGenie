@@ -1,16 +1,13 @@
 """
 rag_pipeline.py
-
 Processes all uploaded PDFs and creates a single FAISS vector database.
 """
-
 import os
 
 from utils.pdf_loader import extract_text
 from utils.text_splitter import split_text
 from utils.embeddings import get_embedding_model
 from utils.vector_store import create_vector_store, save_vector_store
-
 
 def process_pdf(upload_folder, vector_db_path):
     """

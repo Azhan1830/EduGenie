@@ -1,9 +1,7 @@
 """
 export_utils.py
-
 Utility functions for exporting chat history.
 """
-
 import os
 from datetime import datetime
 
@@ -12,7 +10,6 @@ def export_chat_as_txt(chat_history, export_folder):
     """
     Export chat history as a text file.
     """
-
     os.makedirs(export_folder, exist_ok=True)
 
     filename = f"chat_{datetime.now().strftime('%Y%m%d_%H%M%S')}.txt"

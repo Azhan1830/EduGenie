@@ -1,11 +1,8 @@
 """
 pdf_loader.py
-
 Handles reading PDF files and extracting text.
 """
-
 from pypdf import PdfReader
-
 
 def load_pdf(file_path):
     """
@@ -19,7 +16,6 @@ def load_pdf(file_path):
     """
 
     return PdfReader(file_path)
-
 
 def extract_text(file_path):
     """

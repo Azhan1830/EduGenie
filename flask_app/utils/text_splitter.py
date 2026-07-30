@@ -1,11 +1,8 @@
 """
 text_splitter.py
-
 Handles splitting extracted text into smaller chunks.
 """
-
 from langchain_text_splitters import RecursiveCharacterTextSplitter
-
 
 def split_text(text, chunk_size=1000, chunk_overlap=200):
     """
