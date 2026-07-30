@@ -2,75 +2,126 @@
 <html lang="en">
 
 <head>
-
     <meta charset="UTF-8">
-    <meta name="viewport"
-          content="width=device-width, initial-scale=1.0">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
     <title>
-
         {% block title %}
         EduGenie
         {% endblock %}
-
     </title>
 
     <!-- Bootstrap -->
-
-    <link
-        href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.7/dist/css/bootstrap.min.css"
-        rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.7/dist/css/bootstrap.min.css"
+          rel="stylesheet">
 
     <!-- Bootstrap Icons -->
-
-    <link
-        rel="stylesheet"
-        href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.13.1/font/bootstrap-icons.min.css">
+    <link rel="stylesheet"
+          href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.13.1/font/bootstrap-icons.min.css">
 
     <!-- Google Font -->
-
-    <link
-        href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap"
-        rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap"
+          rel="stylesheet">
 
     <!-- Custom CSS -->
-
-    <link
-        rel="stylesheet"
-        href="{{ url_for('static', filename='css/styles.css') }}">
-
+    <link rel="stylesheet"
+          href="{{ url_for('static', filename='css/styles.css') }}">
 </head>
 
 <body>
 
-<nav class="navbar navbar-expand-lg navbar-dark bg-dark shadow-sm">
+<!-- ===================== NAVBAR ===================== -->
+
+<nav class="navbar navbar-expand-lg">
 
     <div class="container">
 
-        <a class="navbar-brand fw-bold"
-           href="/">
+        <a class="navbar-brand d-flex align-items-center"
+           href="{{ url_for('main.home') }}">
 
-            <i class="bi bi-robot"></i>
+            <i class="bi bi-stars fs-2 me-2"></i>
 
-            EduGenie AI
+            <div>
+
+                <div class="fw-bold">
+                    EduGenie
+                </div>
+
+                <small class="text-secondary">
+                    AI PDF Learning Assistant
+                </small>
+
+            </div>
 
         </a>
 
-        <div>
+        <button class="navbar-toggler border-0 shadow-none"
+                type="button"
+                data-bs-toggle="collapse"
+                data-bs-target="#navbarMenu">
 
-            <a href="/upload"
-               class="btn btn-outline-light me-2">
+            <i class="bi bi-list text-white fs-2"></i>
 
-                Upload PDF
+        </button>
 
-            </a>
+        <div class="collapse navbar-collapse"
+             id="navbarMenu">
 
-            <a href="/chat"
-               class="btn btn-primary">
+            <ul class="navbar-nav ms-auto align-items-lg-center">
 
-                Chat
+                <li class="nav-item">
 
-            </a>
+                    <a class="nav-link {% if request.endpoint=='main.home' %}active{% endif %}"
+                       href="{{ url_for('main.home') }}">
+
+                        <i class="bi bi-house"></i>
+
+                        Home
+
+                    </a>
+
+                </li>
+
+                <li class="nav-item">
+
+                    <a class="nav-link {% if request.endpoint and request.endpoint.startswith('upload') %}active{% endif %}"
+                       href="{{ url_for('upload.upload') }}">
+
+                        <i class="bi bi-file-earmark-arrow-up"></i>
+
+                        Documents
+
+                    </a>
+
+                </li>
+
+                <li class="nav-item">
+
+                    <a class="nav-link {% if request.endpoint and request.endpoint.startswith('chat') %}active{% endif %}"
+                       href="{{ url_for('chat.chat') }}">
+
+                        <i class="bi bi-robot"></i>
+
+                        AI Chat
+
+                    </a>
+
+                </li>
+
+                <li class="nav-item ms-lg-3">
+
+                    <a class="btn btn-primary"
+                       href="{{ url_for('chat.chat') }}">
+
+                        <i class="bi bi-stars"></i>
+
+                        Start Chat
+
+                    </a>
+
+                </li>
+
+            </ul>
 
         </div>
 
@@ -78,107 +129,144 @@
 
 </nav>
 
-<main>
+<!-- ===================== FLASH MESSAGES ===================== -->
 
-
-<div class="container mt-3">
+<div class="container mt-4">
 
 {% with messages = get_flashed_messages(with_categories=true) %}
 
-    {% if messages %}
+{% if messages %}
 
-        {% for category, message in messages %}
+{% for category, message in messages %}
 
-            <div class="alert alert-{{ category }} alert-dismissible fade show shadow-sm">
+<div class="alert alert-{{ category }} alert-dismissible fade show">
 
-                {{ message }}
+    {{ message }}
 
-                <button
-                    type="button"
-                    class="btn-close"
-                    data-bs-dismiss="alert">
-                </button>
+    <button type="button"
+            class="btn-close"
+            data-bs-dismiss="alert">
+    </button>
 
-            </div>
+</div>
 
-        {% endfor %}
+{% endfor %}
 
-    {% endif %}
+{% endif %}
 
 {% endwith %}
 
 </div>
 
+<!-- ===================== CONTENT ===================== -->
+
+<main>
+
 {% block content %}
+
 {% endblock %}
 
 </main>
 
+<!-- ===================== FOOTER ===================== -->
 
-<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.7/dist/js/bootstrap.bundle.min.js">
-    document.addEventListener("DOMContentLoaded", () => {
+<footer class="mt-5">
 
-    const form = document.querySelector("form");
+<div class="container">
 
-    if(form){
+<hr>
 
-        form.addEventListener("submit", () => {
+<div class="row">
 
-            const btn=document.getElementById("uploadButton");
+<div class="col-md-6">
 
-            if(btn){
+<h5>
 
-                btn.innerHTML=`
-                <span class="spinner-border spinner-border-sm"></span>
-                Processing PDF...
-                `;
+✨ EduGenie
 
-                btn.disabled=true;
+</h5>
 
-            }
+<p>
+
+AI-powered PDF Learning Assistant using
+RAG, FAISS and Google's Gemini AI.
+
+</p>
+
+</div>
+
+<div class="col-md-6 text-md-end">
+
+<p>
+
+Built with Flask • Bootstrap • Gemini • FAISS
+
+</p>
+
+<small>
+
+Version 1.0
+
+</small>
+
+</div>
+
+</div>
+
+</div>
+
+</footer>
+
+<!-- ===================== Bootstrap ===================== -->
+
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.7/dist/js/bootstrap.bundle.min.js"></script>
+
+<!-- ===================== GLOBAL JS ===================== -->
+
+<script>
+
+document.addEventListener("DOMContentLoaded", function(){
+
+    // Upload Loading
+
+    const uploadBtn = document.getElementById("uploadButton");
+
+    if(uploadBtn){
+
+        uploadBtn.form.addEventListener("submit", function(){
+
+            uploadBtn.disabled = true;
+
+            uploadBtn.innerHTML = `
+            <span class="spinner-border spinner-border-sm me-2"></span>
+            Processing...
+            `;
 
         });
 
     }
 
-})
+    // Chat Loading
 
-document.addEventListener("DOMContentLoaded",()=>{
+    const askBtn = document.getElementById("askButton");
 
-    const askButton=document.getElementById("askButton");
+    if(askBtn){
 
-    const form=document.querySelector(".chat-form");
+        askBtn.form.addEventListener("submit", function(){
 
-    if(form){
+            askBtn.disabled = true;
 
-        form.addEventListener("submit",()=>{
-
-            askButton.innerHTML=`
+            askBtn.innerHTML = `
             <span class="spinner-border spinner-border-sm"></span>
             `;
 
-            askButton.disabled=true;
-
         });
 
     }
 
-}); 
+    // Auto Focus
 
-
-function copyAnswer(){
-
-    const answer=document.querySelector(".ai-message .message-body");
-
-    if(!answer) return;
-
-    navigator.clipboard.writeText(answer.innerText);
-
-}
-
-document.addEventListener("DOMContentLoaded",()=>{
-
-    const input=document.querySelector('input[name="question"]');
+    const input = document.querySelector('input[name="question"]');
 
     if(input){
 
@@ -186,7 +274,49 @@ document.addEventListener("DOMContentLoaded",()=>{
 
     }
 
+    // Auto Scroll
+
+    const chatScroll = document.querySelector(".chat-scroll");
+
+    if(chatScroll){
+
+        chatScroll.scrollTop = chatScroll.scrollHeight;
+
+    }
+
 });
+
+function fillPrompt(text){
+
+    const input = document.querySelector('input[name="question"]');
+
+    if(input){
+
+        input.value = text;
+
+        input.focus();
+
+    }
+
+}
+
+function copyAnswer(button){
+
+    const answer = button.parentElement.querySelector(".answer-text");
+
+    if(!answer) return;
+
+    navigator.clipboard.writeText(answer.innerText);
+
+    button.innerHTML = '<i class="bi bi-check-lg"></i> Copied';
+
+    setTimeout(function(){
+
+        button.innerHTML = '<i class="bi bi-clipboard"></i> Copy';
+
+    },1500);
+
+}
 
 </script>
 

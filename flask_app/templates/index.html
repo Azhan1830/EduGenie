@@ -1,39 +1,58 @@
 {% extends "base.html" %}
 
 {% block title %}
-EduGenie AI
+EduGenie
 {% endblock %}
 
 {% block content %}
 
+<!-- ================= HERO ================= -->
+
 <section class="hero-section">
+
+    <div class="hero-glow"></div>
 
     <div class="container text-center">
 
-        <h1 class="display-4 fw-bold mb-4">
+        <span class="badge bg-primary px-4 py-2 mb-4">
 
-            🤖 EduGenie AI
+            🚀 AI Powered Learning Assistant
+
+        </span>
+
+        <h1 class="display-3 fw-bold">
+
+            Chat With Your
+
+            <span class="text-gradient">
+
+                PDF Documents
+
+            </span>
 
         </h1>
 
-        <p class="lead mb-4">
+        <p class="lead mt-4">
 
-            Upload your PDF and ask questions using the power of
-            Retrieval-Augmented Generation (RAG) and Google's Gemini AI.
+            EduGenie helps you interact with your study material using
+            Retrieval-Augmented Generation (RAG), FAISS Vector Search
+            and Google's Gemini AI.
 
         </p>
 
-        <div class="mt-4">
+        <div class="hero-buttons mt-5">
 
-            <a href="/upload" class="btn btn-primary btn-lg me-3">
+            <a href="{{ url_for('upload.upload') }}"
+               class="btn btn-primary btn-lg me-3">
 
-                <i class="bi bi-upload"></i>
+                <i class="bi bi-cloud-upload"></i>
 
-                Upload PDF
+                Upload PDFs
 
             </a>
 
-            <a href="/chat" class="btn btn-outline-dark btn-lg">
+            <a href="{{ url_for('chat.chat') }}"
+               class="btn btn-outline-light btn-lg">
 
                 <i class="bi bi-chat-dots"></i>
 
@@ -47,77 +66,342 @@ EduGenie AI
 
 </section>
 
-<section class="container py-5">
 
-    <div class="row g-4">
+<!-- ================= STATS ================= -->
 
-        <div class="col-md-4">
+<section class="py-5">
 
-            <div class="card h-100 text-center p-4">
+<div class="container">
 
-                <i class="bi bi-file-earmark-pdf display-4 text-danger"></i>
+<div class="row g-4">
 
-                <h4 class="mt-3">
+<div class="col-md-3">
 
-                    Upload Documents
+<div class="card stat-card text-center">
 
-                </h4>
+<h2 class="text-gradient">
 
-                <p>
+∞
 
-                    Upload PDF files securely and process them for AI-powered search.
+</h2>
 
-                </p>
+<p>
 
-            </div>
+Unlimited Questions
 
-        </div>
+</p>
 
-        <div class="col-md-4">
+</div>
 
-            <div class="card h-100 text-center p-4">
+</div>
 
-                <i class="bi bi-cpu display-4 text-primary"></i>
+<div class="col-md-3">
 
-                <h4 class="mt-3">
+<div class="card stat-card text-center">
 
-                    AI Powered
+<h2 class="text-gradient">
 
-                </h4>
+AI
 
-                <p>
+</h2>
 
-                    Gemini AI answers questions using only the relevant parts of your document.
+<p>
 
-                </p>
+Gemini Powered
 
-            </div>
+</p>
 
-        </div>
+</div>
 
-        <div class="col-md-4">
+</div>
 
-            <div class="card h-100 text-center p-4">
+<div class="col-md-3">
 
-                <i class="bi bi-lightning-charge display-4 text-warning"></i>
+<div class="card stat-card text-center">
 
-                <h4 class="mt-3">
+<h2 class="text-gradient">
 
-                    Fast Retrieval
+RAG
 
-                </h4>
+</h2>
 
-                <p>
+<p>
 
-                    FAISS vector search finds the most relevant content in milliseconds.
+Context Aware
 
-                </p>
+</p>
 
-            </div>
+</div>
 
-        </div>
+</div>
 
-    </div>
+<div class="col-md-3">
+
+<div class="card stat-card text-center">
+
+<h2 class="text-gradient">
+
+FAISS
+
+</h2>
+
+<p>
+
+Vector Search
+
+</p>
+
+</div>
+
+</div>
+
+</div>
+
+</div>
+
+</section>
+
+
+<!-- ================= FEATURES ================= -->
+
+<section class="pb-5">
+
+<div class="container">
+
+<div class="section-title text-center mb-5">
+
+<h2>
+
+Everything You Need
+
+</h2>
+
+<p>
+
+A complete AI-powered PDF assistant for students and researchers.
+
+</p>
+
+</div>
+
+<div class="row g-4">
+
+<div class="col-lg-4">
+
+<div class="card feature-card">
+
+<i class="bi bi-file-earmark-pdf"></i>
+
+<h4>
+
+Upload PDFs
+
+</h4>
+
+<p>
+
+Upload one or multiple PDF files to build your own searchable knowledge base.
+
+</p>
+
+</div>
+
+</div>
+
+<div class="col-lg-4">
+
+<div class="card feature-card">
+
+<i class="bi bi-search"></i>
+
+<h4>
+
+Smart Retrieval
+
+</h4>
+
+<p>
+
+Relevant document chunks are retrieved using FAISS before answering.
+
+</p>
+
+</div>
+
+</div>
+
+<div class="col-lg-4">
+
+<div class="card feature-card">
+
+<i class="bi bi-stars"></i>
+
+<h4>
+
+AI Answers
+
+</h4>
+
+<p>
+
+Gemini AI generates accurate answers grounded in your uploaded PDFs.
+
+</p>
+
+</div>
+
+</div>
+
+</div>
+
+</div>
+
+</section>
+
+
+<!-- ================= HOW IT WORKS ================= -->
+
+<section class="py-5">
+
+<div class="container">
+
+<div class="section-title text-center mb-5">
+
+<h2>
+
+How EduGenie Works
+
+</h2>
+
+</div>
+
+<div class="row g-4">
+
+<div class="col-md-3">
+
+<div class="card feature-card text-center">
+
+<i class="bi bi-cloud-upload"></i>
+
+<h4>
+
+1. Upload
+
+</h4>
+
+<p>
+
+Upload PDF documents.
+
+</p>
+
+</div>
+
+</div>
+
+<div class="col-md-3">
+
+<div class="card feature-card text-center">
+
+<i class="bi bi-diagram-3"></i>
+
+<h4>
+
+2. Index
+
+</h4>
+
+<p>
+
+Create embeddings and build a FAISS vector database.
+
+</p>
+
+</div>
+
+</div>
+
+<div class="col-md-3">
+
+<div class="card feature-card text-center">
+
+<i class="bi bi-search-heart"></i>
+
+<h4>
+
+3. Retrieve
+
+</h4>
+
+<p>
+
+Find the most relevant document chunks.
+
+</p>
+
+</div>
+
+</div>
+
+<div class="col-md-3">
+
+<div class="card feature-card text-center">
+
+<i class="bi bi-robot"></i>
+
+<h4>
+
+4. Answer
+
+</h4>
+
+<p>
+
+Gemini AI generates context-aware answers.
+
+</p>
+
+</div>
+
+</div>
+
+</div>
+
+</div>
+
+</section>
+
+
+<!-- ================= CTA ================= -->
+
+<section class="pb-5">
+
+<div class="container">
+
+<div class="card glass-card text-center p-5">
+
+<h2>
+
+Ready to Learn Smarter?
+
+</h2>
+
+<p class="mt-3">
+
+Upload your PDFs and start asking questions instantly.
+
+</p>
+
+<a href="{{ url_for('upload.upload') }}"
+   class="btn btn-primary btn-lg mt-3">
+
+    Get Started
+
+</a>
+
+</div>
+
+</div>
 
 </section>
 

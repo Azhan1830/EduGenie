@@ -1,130 +1,271 @@
 {% extends "base.html" %}
 
 {% block title %}
-EduGenie Chat
+AI Chat | EduGenie
 {% endblock %}
 
 {% block content %}
 
 <div class="container py-5">
 
-    <div class="chat-container">
+    <!-- Header -->
 
-        <div class="chat-header">
+    <div class="text-center mb-5">
 
-            <h2>
-                <i class="bi bi-robot"></i>
-                EduGenie AI Assistant
-            </h2>
+        <span class="badge bg-primary px-4 py-2 mb-3">
+            🤖 AI Document Assistant
+        </span>
 
-            <p class="text-muted">
-                Ask questions about your uploaded PDFs.
-            </p>
+        <h1 class="display-5 fw-bold">
 
-            <div class="text-end mt-3">
-                
-                <form method="POST" action="{{ url_for('chat.clear_chat') }}" style="display:inline;">
-                    
-                    <button class="btn btn-outline-danger" onclick="return confirm('Clear the entire chat history?');">
+            Chat With Your
 
-                        <i class="bi bi-trash"></i>
-                        Clear Chat
-                    </button>
+            <span class="text-gradient">
 
-                </form>
+                Documents
+
+            </span>
+
+        </h1>
+
+        <p class="lead">
+
+            Ask questions about your uploaded PDFs and receive intelligent,
+            context-aware answers.
+
+        </p>
+
+    </div>
+
+    <!-- Stats -->
+
+    <div class="row g-4 mb-4">
+
+        <div class="col-md-4">
+
+            <div class="card stat-card text-center">
+
+                <h2>{{ chat_history|length }}</h2>
+
+                <p class="mb-0">
+                    Questions Asked
+                </p>
 
             </div>
 
         </div>
 
-        <div class="d-flex justify-content-end gap-2 mt-3">
-            <a href="{{ url_for('export.export_chat') }}" class="btn btn-outline-success">
-                <i class="bi bi-download"></i>
-                 Export Chat
-            </a>
+        <div class="col-md-4">
 
-            <form method="POST" action="{{ url_for('chat.clear_chat') }}" style="display:inline;">
+            <div class="card stat-card text-center">
 
-                <button class="btn btn-outline-danger" onclick="return confirm('Clear the entire chat history?');">
+                <h2>AI</h2>
 
-                    <i class="bi bi-trash"></i>
-                    Clear Chat
-                </button>
-            </form>
+                <p class="mb-0">
+                    Gemini Powered
+                </p>
+
+            </div>
+
         </div>
+
+        <div class="col-md-4">
+
+            <div class="card stat-card text-center">
+
+                <h2>RAG</h2>
+
+                <p class="mb-0">
+                    Context Aware
+                </p>
+
+            </div>
+
+        </div>
+
+    </div>
+
+    <!-- Prompt Chips -->
+
+    <div class="prompt-container mb-4">
+
+        <div class="prompt-chip"
+             onclick="fillPrompt('Summarize this document')">
+
+            📄 Summarize Document
+
+        </div>
+
+        <div class="prompt-chip"
+             onclick="fillPrompt('Explain this topic in simple words')">
+
+            💡 Explain Simply
+
+        </div>
+
+        <div class="prompt-chip"
+             onclick="fillPrompt('List the important points')">
+
+            ⭐ Important Points
+
+        </div>
+
+        <div class="prompt-chip"
+             onclick="fillPrompt('Generate revision notes')">
+
+            📝 Revision Notes
+
+        </div>
+
+    </div>
+
+    <!-- Action Buttons -->
+
+    <div class="d-flex justify-content-end gap-3 mb-4">
+
+    <a
+        href="{{ url_for('export.export_chat') }}"
+        class="btn btn-outline-success">
+
+        <i class="bi bi-download"></i>
+
+        Export Chat
+
+    </a>
+
+    <form
+        method="POST"
+        action="{{ url_for('chat.clear_chat') }}">
+
+        <button
+            class="btn btn-outline-danger"
+            onclick="return confirm('Clear chat history?')">
+
+            <i class="bi bi-trash"></i>
+
+            Clear Chat
+
+        </button>
+
+    </form>
+
+</div>
+
+    <!-- Chat Window -->
+
+    <div class="chat-container">
 
         {% if chat_history %}
 
+        <div class="chat-scroll">
+
             {% for chat in chat_history %}
 
-                <!-- User Message -->
+            <!-- User -->
 
-                <div class="message user-message">
+            <div class="message user-message mb-4">
 
-                    <div class="message-title">
-                         You
-                    </div>
+                <div class="avatar avatar-user">
 
-                    <div class="message-body">
+                    <i class="bi bi-person-fill"></i>
+
+                </div>
+
+                <div class="message-content">
+
+                    <strong>You</strong>
+
+                    <div class="mt-2">
+
                         {{ chat.question }}
+
                     </div>
 
                 </div>
-
-                <!-- AI Message -->
-
-                <div class="message ai-message">
-
-                    <div class="message-title">
-                         EduGenie
-                    </div>
-
-                    <div class="message-body answer-text">
-                        {{ chat.answer }}
-                    </div>
-
-                    <button
-                        class="btn btn-outline-secondary btn-sm mt-3 copy-btn"
-                        onclick="copyAnswer(this)"
-                    >
-                        <i class="bi bi-clipboard"></i>
-                        Copy Answer
-                    </button>
-
-                </div>
-
-                {% if chat.context %}
-
-                    <details class="source-box">
-
-                        <summary>
-                            View Retrieved Source
-                        </summary>
-
-                        <pre class="mt-3">{{ chat.context }}</pre>
-
-                    </details>
-
-                {% endif %}
-
-                <hr class="my-4">
-
-            {% endfor %}
-
-        {% else %}
-
-            <div class="alert alert-info">
-
-                Start by asking your first question about the uploaded PDFs.
 
             </div>
 
+            <!-- AI -->
+
+            <div class="message ai-message mb-5">
+
+                <div class="avatar avatar-ai">
+
+                    <i class="bi bi-stars"></i>
+
+                </div>
+
+                <div class="message-content">
+
+                    <strong>EduGenie AI</strong>
+
+                    <div class="answer-text mt-2">
+
+                        {{ chat.answer }}
+
+                    </div>
+
+                    <button
+                        class="btn btn-outline-light btn-sm mt-3"
+                        onclick="copyAnswer(this)">
+
+                        <i class="bi bi-clipboard"></i>
+
+                        Copy
+
+                    </button>
+
+                    {% if chat.context %}
+
+                    <details class="source-box mt-3">
+
+                        <summary>
+
+                            📚 Retrieved Context
+
+                        </summary>
+
+                        <pre>{{ chat.context }}</pre>
+
+                    </details>
+
+                    {% endif %}
+
+                </div>
+
+            </div>
+
+            {% endfor %}
+
+        </div>
+
+        {% else %}
+
+        <div class="empty-chat text-center py-5">
+
+            <i class="bi bi-chat-square-text display-3"></i>
+
+            <h3 class="mt-3">
+
+                Start Your First Conversation
+
+            </h3>
+
+            <p>
+
+                Ask anything about your uploaded PDFs.
+
+            </p>
+
+        </div>
+
         {% endif %}
+
+        <!-- Chat Form -->
 
         <form
             method="POST"
-            class="chat-form"
-        >
+            class="chat-form mt-5">
 
             <div class="input-group">
 
@@ -132,15 +273,12 @@ EduGenie Chat
                     type="text"
                     name="question"
                     class="form-control"
-                    placeholder="Ask anything about your PDFs..."
-                    required
-                >
+                    placeholder="Ask a question..."
+                    required>
 
                 <button
                     id="askButton"
-                    class="btn btn-primary"
-                    type="submit"
-                >
+                    class="btn btn-primary">
 
                     <i class="bi bi-send-fill"></i>
 
@@ -153,24 +291,5 @@ EduGenie Chat
     </div>
 
 </div>
-
-<script>
-function copyAnswer(button) {
-
-    const answer = button.parentElement.querySelector(".answer-text").innerText;
-
-    navigator.clipboard.writeText(answer);
-
-    button.innerHTML =
-        '<i class="bi bi-check-lg"></i> Copied';
-
-    setTimeout(() => {
-
-        button.innerHTML =
-        '<i class="bi bi-clipboard"></i> Copy Answer';
-
-    }, 2000);
-}
-</script>
 
 {% endblock %}
